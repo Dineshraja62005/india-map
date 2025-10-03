@@ -11,6 +11,9 @@ function App() {
   const lastScrollY = useRef(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const headerRef = useRef(null); // Ref to get the header element
+  const [headerHeight, setHeaderHeight] = useState(0); // State to store its height
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -24,6 +27,14 @@ function App() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // --- NEW EFFECT TO MEASURE HEADER ---
+  useEffect(() => {
+    // Set the header height once the component mounts
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
   }, []);
 
   useEffect(() => {
@@ -46,7 +57,14 @@ function App() {
             <h1>Uncovering the Invisible Threat: Forever Chemicals in India</h1>
             <p>An open-source initiative to track PFAS contamination across India.</p>
           </div>
-          <ScrollLink to="main-content" smooth={true} duration={1000} offset={-85} className="scroll-down-link" aria-label="Scroll to main content">
+          <ScrollLink
+            to="main-content"
+            smooth={true}
+            duration={1000}
+            offset={-headerHeight} // Use the state variable here
+            className="scroll-down-link"
+            aria-label="Scroll to main content"
+          >
             <div className="scroll-down-icon">
               <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
             </div>
