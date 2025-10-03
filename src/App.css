@@ -68,7 +68,7 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/pic.jpg');
   background-size: cover;
   background-position: center;
-  animation: zoom-out 20s ease-out forwards;
+  animation: zoom-out 10s ease-out forwards;
 }
 @keyframes zoom-out {
   from { transform: scale(1.1); }
