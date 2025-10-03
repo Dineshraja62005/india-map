@@ -51,6 +51,8 @@ function App() {
           setIsMobileMenuOpen={setIsMobileMenuOpen}
         />
 
+        <div className="scroll-container"></div>
+
         <section className="hero">
           <div className="hero-background"></div>
           <div className="content-wrapper">

@@ -9,19 +9,24 @@ const Header = React.forwardRef(({ isScrolled, isNavVisible, isMobileMenuOpen, s
     return (
         <header ref={ref} className={`site-header ${isScrolled ? 'scrolled' : ''} ${!isNavVisible ? 'hidden' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
             <div className="header-container">
-                <a href="/" className="logo-link">
+                <a
+                    href="https://www.honeybadger.com/"
+                    className="logo-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     {/* The original static logo */}
-                    <img 
-                        src={staticLogo} 
-                        alt="PFAS Map Logo" 
-                        className="logo-image logo-static" 
+                    <img
+                        src={staticLogo}
+                        alt="PFAS Map Logo"
+                        className="logo-image logo-static"
                     />
                     {/* The new animated logo (GIF) */}
-                    <img 
-                        src={animatedLogo} 
-                        alt="" 
-                        className="logo-image logo-gif" 
-                        aria-hidden="true" 
+                    <img
+                        src={animatedLogo}
+                        alt=""
+                        className="logo-image logo-gif"
+                        aria-hidden="true"
                     />
                 </a>
                 <nav className="main-nav">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; // Import useState
+import { useInView } from 'react-intersection-observer';
 import './IntroSection.css';
 
 const videos = [
@@ -10,9 +11,17 @@ export default function IntroSection() {
     // State to hold the ID of the video that is currently playing
     const [playingVideoId, setPlayingVideoId] = useState(null);
 
+    const { ref, inView } = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
+
     return (
         <>
-            <section className="intro-section">
+            <section
+                ref={ref}
+                className={`intro-section ${inView ? 'is-visible' : ''}`}
+            >
                 <div className="floating-element shape-1"></div>
                 <div className="floating-element shape-2"></div>
                 <div className="floating-element shape-3"></div>

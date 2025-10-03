@@ -68,7 +68,7 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/pic.jpg');
   background-size: cover;
   background-position: center;
-  animation: zoom-out 5s ease-out forwards;
+  animation: zoom-out 3.5s ease-out forwards;
 }
 @keyframes zoom-out {
   from { transform: scale(1.1); }
@@ -185,4 +185,36 @@ a:focus-visible, button:focus-visible {
     right: 2rem;
     z-index: 2001;
   }
+}
+
+/* --- HERO TEXT ENTRANCE ANIMATION --- */
+
+/* 1. Define the animation keyframes */
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px); /* Start 40px down */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End at its original position */
+  }
+}
+
+/* 2. Prepare the elements for animation */
+.hero h1,
+.hero p {
+  /* Start the elements as invisible */
+  opacity: 0; 
+  
+  /* Apply the animation */
+  animation-name: fade-slide-up;
+  animation-duration: 1s; /* How long the animation takes */
+  animation-timing-function: ease-out; /* The speed curve */
+  animation-fill-mode: forwards; /* Stay visible after animation ends */
+}
+
+/* 3. Stagger the animations for a better effect */
+.hero p {
+  animation-delay: 0.4s; /* Start the paragraph 0.4s after the h1 */
 }
