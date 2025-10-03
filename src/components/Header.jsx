@@ -1,17 +1,28 @@
 // src/components/Header.jsx
 
-import React from 'react'; // Make sure React is imported
+import React from 'react';
 import staticLogo from '../assets/logo.svg';
+import animatedLogo from '../assets/logo-animated.gif'; // Import the animated logo
 import './Header.css';
 
-// 1. Wrap your component in React.forwardRef
 const Header = React.forwardRef(({ isScrolled, isNavVisible, isMobileMenuOpen, setIsMobileMenuOpen }, ref) => {
     return (
-        // 2. Use the 'ref' from the new argument here
         <header ref={ref} className={`site-header ${isScrolled ? 'scrolled' : ''} ${!isNavVisible ? 'hidden' : ''} ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
             <div className="header-container">
                 <a href="/" className="logo-link">
-                    <img src={staticLogo} alt="PFAS Map Logo" className="logo-image" />
+                    {/* The original static logo */}
+                    <img 
+                        src={staticLogo} 
+                        alt="PFAS Map Logo" 
+                        className="logo-image logo-static" 
+                    />
+                    {/* The new animated logo (GIF) */}
+                    <img 
+                        src={animatedLogo} 
+                        alt="" 
+                        className="logo-image logo-gif" 
+                        aria-hidden="true" 
+                    />
                 </a>
                 <nav className="main-nav">
                     <ul>
