@@ -1,5 +1,5 @@
 .site-header {
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
@@ -7,7 +7,7 @@
     box-sizing: border-box;
     background: transparent;
     border-bottom: 1px solid transparent;
-    transition: background-color 0.4s ease-out, transform 0.4s ease-out;
+    transition: background-color 0.4s ease, transform 0.4s ease, opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .site-header.scrolled {
@@ -17,8 +17,11 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.site-header.hidden {
-    transform: translateY(-100%);
+.site-header.nav-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* The transition property is no longer needed here */
 }
 
 .header-container {
@@ -276,4 +279,12 @@
 
 .header-actions {
   animation-delay: 0.4s;
+}
+
+/* Add this to the end of Header.css */
+.nav-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }

@@ -21,15 +21,6 @@ body {
   padding: 0 2rem;
 }
 
-/* --- GRID LAYOUT FOR HERO --- */
-.hero-grid-container {
-  display: grid;
-  height: 100vh;
-}
-.hero-grid-container > .site-header,
-.hero-grid-container > .hero {
-  grid-area: 1 / 1;
-}
 
 /* --- NAVIGATION BAR --- */
 .site-header {
@@ -39,60 +30,24 @@ body {
   height: fit-content;
   transition: background-color 0.4s ease-out, transform 0.4s ease-out;
 }
+
 .site-header.scrolled {
   background: rgba(26, 26, 26, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .site-header.hidden {
   transform: translateY(-100%);
 }
 
-/* --- HERO SECTION --- */
-.hero {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  overflow: hidden;
-}
-.hero-background {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 1;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/pic.jpg');
-  background-size: cover;
-  background-position: center;
-  animation: zoom-out 3.5s ease-out forwards;
-}
-@keyframes zoom-out {
-  from { transform: scale(1.1); }
-  to { transform: scale(1); }
-}
-.hero .content-wrapper {
-  position: relative;
-  z-index: 2;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 800;
-  font-size: 5em;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-}
-.hero p {
-  font-size: 1.25rem;
-  max-width: 700px;
-  margin: 1rem auto 0;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-}
 
 /* --- MAIN CONTENT & FOOTER --- */
-main { padding: 4rem 0; }
+main {
+  padding: 4rem 0;
+}
+
 footer {
   background-color: var(--section-bg-color);
   border-top: 1px solid var(--border-color);
@@ -100,52 +55,30 @@ footer {
   padding: 1.5rem 0;
 }
 
-/* All other styles for scroll icon, mobile nav, etc., remain the same */
 
-/* --- SCROLL DOWN ICON --- */
-.scroll-down-link {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  cursor: pointer;
-}
-.scroll-down-icon {
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: bounce 2.5s infinite;
-  transition: background-color 0.3s;
-}
-.scroll-down-link:hover .scroll-down-icon {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-20px); }
-  60% { transform: translateY(-10px); }
-}
 
 /* --- ACCESSIBILITY --- */
-a:focus-visible, button:focus-visible {
+a:focus-visible,
+button:focus-visible {
   outline: 3px solid #6495ED;
   outline-offset: 2px;
 }
 
 /* --- MOBILE RESPONSIVENESS --- */
-.mobile-nav-toggle { display: none; }
+.mobile-nav-toggle {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .header-container {
     padding: 0 1rem;
   }
-  .main-nav, .header-actions {
+
+  .main-nav,
+  .header-actions {
     display: none;
   }
+
   .mobile-nav-toggle {
     display: block;
     background: transparent;
@@ -153,32 +86,41 @@ a:focus-visible, button:focus-visible {
     cursor: pointer;
     z-index: 2000;
   }
-  .mobile-menu-open .main-nav, .mobile-menu-open .header-actions {
+
+  .mobile-menu-open .main-nav,
+  .mobile-menu-open .header-actions {
     display: flex;
   }
+
   .mobile-menu-open .main-nav {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.95);
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
   .mobile-menu-open .main-nav ul {
     flex-direction: column;
     gap: 2rem;
     text-align: center;
   }
+
   .mobile-menu-open .main-nav a {
     font-size: 1.8rem;
   }
+
   .mobile-menu-open .header-actions {
     position: fixed;
     bottom: 10%;
     left: 50%;
     transform: translateX(-50%);
   }
+
   .mobile-menu-open .mobile-nav-toggle {
     position: fixed;
     top: 25px;
@@ -187,34 +129,56 @@ a:focus-visible, button:focus-visible {
   }
 }
 
-/* --- HERO TEXT ENTRANCE ANIMATION --- */
+/* Add this to the end of App.css */
 
-/* 1. Define the animation keyframes */
-@keyframes fade-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px); /* Start 40px down */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0); /* End at its original position */
-  }
+/* This makes browser-controlled scrolling smoother */
+/* Add this to index.css */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* This is the key: it prevents the main body from ever showing a scrollbar */
+  overflow: hidden;
 }
 
-/* 2. Prepare the elements for animation */
-.hero h1,
-.hero p {
-  /* Start the elements as invisible */
-  opacity: 0; 
-  
-  /* Apply the animation */
-  animation-name: fade-slide-up;
-  animation-duration: 1s; /* How long the animation takes */
-  animation-timing-function: ease-out; /* The speed curve */
-  animation-fill-mode: forwards; /* Stay visible after animation ends */
+/* This will be our main scrolling container */
+.scroll-container {
+  /* Allows the container to be scrolled */
+  overflow-y: scroll;
+  /* Crucially, it must take up the full height of the viewport */
+  height: 100vh;
+
+  background-color: #1a1a1a;
 }
 
-/* 3. Stagger the animations for a better effect */
-.hero p {
-  animation-delay: 0.4s; /* Start the paragraph 0.4s after the h1 */
+/* This class will be applied to each section we want to snap to */
+.scroll-section {
+  /* Defines this as a snap point */
+  scroll-snap-align: start;
+  /* Each snap section should fill the viewport for the best effect */
+  height: 100vh;
+  /* Ensures content within the section is positioned correctly */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Add this new class to the end of App.css */
+
+/* ... your existing .scroll-container and .scroll-section styles ... */
+
+/* This new class will wrap all content AFTER the snap pages */
+.normal-scroll {
+  /* Allows this specific section to scroll internally */
+  overflow-y: auto;
+  /* It is still a snap point itself */
+  scroll-snap-align: start;
+  /* It needs its own background color */
+  background-color: #ffffff;
+}
+
+/* Add this new rule to the end of App.css */
+
+/* This targets the VERY FIRST .scroll-section and gives it a dark background */
+.scroll-container > .scroll-section:first-child {
+  background-color: #1a1a1a;
 }
