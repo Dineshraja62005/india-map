@@ -129,17 +129,6 @@ button:focus-visible {
   }
 }
 
-/* Add this to the end of App.css */
-
-/* This makes browser-controlled scrolling smoother */
-/* Add this to index.css */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  /* This is the key: it prevents the main body from ever showing a scrollbar */
-  overflow: hidden;
-}
 
 /* This will be our main scrolling container */
 .scroll-container {
@@ -147,8 +136,6 @@ body {
   overflow-y: scroll;
   /* Crucially, it must take up the full height of the viewport */
   height: 100vh;
-
-  background-color: #1a1a1a;
 }
 
 /* This class will be applied to each section we want to snap to */

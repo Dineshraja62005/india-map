@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.6.0",
     "@react-three/fiber": "^9.3.0",
     "axios": "^1.12.2",
     "framer-motion": "^12.23.22",
+    "gsap": "^3.13.0",
     "maplibre-gl": "^5.7.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

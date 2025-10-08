@@ -62,3 +62,13 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+/* This makes browser-controlled scrolling smoother */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* This is the key: it prevents the main body from ever showing a scrollbar */
+  overflow: hidden;
+}
