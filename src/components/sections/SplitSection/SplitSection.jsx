@@ -2,37 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import ScrambledText from '../../animations/ScrambledText/ScrambledText';
 import FadingLettersText from '../../animations/FadingLettersText/FadingLettersText';
 import './SplitSection.css';
+import '../DarkPane.css';
 
 const SplitSection = () => {
-    // --- State and Refs for Internal Logic ---
-    const videoRef = useRef(null);
     const topPaneRef = useRef(null);
     const bottomPaneRef = useRef(null);
     const [isTopPaneVisible, setIsTopPaneVisible] = useState(false);
     const [isBottomPaneVisible, setIsBottomPaneVisible] = useState(false);
 
-    // --- Effect for Seamless Video Loop ---
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        let isPlayingForward = true;
-        const handleTimeUpdate = () => {
-            if (isPlayingForward && video.currentTime >= video.duration - 0.1) {
-                isPlayingForward = false;
-                video.playbackRate = -1.0;
-                video.play();
-            } else if (!isPlayingForward && video.currentTime <= 0.1) {
-                isPlayingForward = true;
-                video.playbackRate = 1.0;
-                video.play();
-            }
-        };
-        video.addEventListener('timeupdate', handleTimeUpdate);
-        return () => video.removeEventListener('timeupdate', handleTimeUpdate);
-    }, []);
-
-    // --- Effect for Pane Visibility and Animations ---
+    // Effect for Pane Visibility and Animations
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -58,16 +36,7 @@ const SplitSection = () => {
 
     return (
         <section className="split-section">
-            <video
-                ref={videoRef}
-                className="background-video"
-                autoPlay
-                muted
-                playsInline
-                loop={false}
-            >
-                <source src="/river.mp4" type="video/mp4" />
-            </video>
+            {/* The <video> element has been removed from here */}
 
             <div id="top-pane" ref={topPaneRef} className="split-pane white-pane">
                 <div className="pane-overlay"></div>
@@ -82,7 +51,7 @@ const SplitSection = () => {
                 </div>
             </div>
 
-            <div id="bottom-pane" ref={bottomPaneRef} className="split-pane black-pane">
+            <div id="bottom-pane" ref={bottomPaneRef} className="split-pane dark-pane">
                 <div className="pane-overlay"></div>
                 <div className={`content-wrapper bottom-content ${isBottomPaneVisible ? 'is-visible' : ''}`}>
                     <p className="animated-text dark-bg-text">
