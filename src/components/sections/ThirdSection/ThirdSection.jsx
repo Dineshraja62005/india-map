@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import FadingLettersText from '../../animations/FadingLettersText/FadingLettersText';
+import ViteGlowBackground from '../../animations/ViteGlow/ViteGlowBackground';// Import the new 3D component
 import '../SplitSection/SplitSection.css';
 import '../DarkPane.css';
+import './ThirdSection.css';
 
 const ThirdSection = () => {
     const [isVisible, setIsVisible] = useState(false);
     const sectionRef = useRef(null);
 
-    // Effect for section visibility
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -30,14 +31,18 @@ const ThirdSection = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} className="split-pane dark-pane">
-            {/* The <video> element has been removed from here */}
-            <div className="pane-overlay"></div>
+        <section ref={sectionRef} className="third-section-container dark-pane">
+            <ViteGlowBackground />
+
+            <div className="foreground-animation-container">
+                {/* Use the new 3D component here */}
+            </div>
+
             <div className={`content-wrapper bottom-content ${isVisible ? 'is-visible' : ''}`}>
                 <p className="animated-text dark-bg-text">
-                    <FadingLettersText text="This is the third page" startAnimation={isVisible} />
+                    <FadingLettersText text="A Modern Aesthetic" startAnimation={isVisible} />
                     <br />
-                    <strong>With the same shared style</strong>
+                    <strong>With a 3D Model</strong>
                 </p>
             </div>
         </section>

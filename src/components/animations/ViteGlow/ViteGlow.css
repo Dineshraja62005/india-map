@@ -1,0 +1,57 @@
+.glow-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Ensures it stays in the back */
+    background-color: #000000; /* Dark navy background */
+}
+
+.glow-blob {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: screen; /* Blends the colors nicely */
+    filter: blur(70px);   /* The key to the soft, blurry effect */
+    opacity: 0.6;
+}
+
+/* Define the first blob's color, size, and animation */
+.glow-blob:nth-child(1) {
+    width: 350px;
+    height: 350px;
+    left: 15%;
+    top: 20%;
+    background: rgba(45, 212, 191, 0.5); /* A teal color */
+    animation: float-blob-1 15s infinite alternate ease-in-out;
+}
+
+/* Define the second blob's color, size, and animation */
+.glow-blob:nth-child(2) {
+    width: 450px;
+    height: 450px;
+    right: 10%;
+    bottom: 10%;
+    background: rgba(124, 58, 237, 0.4); /* A purple color */
+    animation: float-blob-2 20s infinite alternate ease-in-out;
+}
+
+/* Keyframe animations to move the blobs around */
+@keyframes float-blob-1 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(100px, 80px) scale(1.1);
+    }
+}
+
+@keyframes float-blob-2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-80px, -50px) scale(1.2);
+    }
+}
