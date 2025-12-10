@@ -136,6 +136,8 @@ button:focus-visible {
   overflow-y: scroll;
   /* Crucially, it must take up the full height of the viewport */
   height: 100vh;
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
 }
 
 /* This class will be applied to each section we want to snap to */
@@ -168,4 +170,15 @@ button:focus-visible {
 /* This targets the VERY FIRST .scroll-section and gives it a dark background */
 .scroll-container > .scroll-section:first-child {
   background-color: #1a1a1a;
+}
+
+/* Add this rule to the bottom of the file for Chrome/Safari */
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+#map-section {
+  background-color: #000000; /* Deep black/grey */
+  color: white; /* Ensure any text in this section is white */
+  justify-content: center; /* Center the map vertically */
 }

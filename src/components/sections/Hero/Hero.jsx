@@ -10,7 +10,7 @@ const Hero = () => {
             <div className="hero-background"></div>
             <div className="content-wrapper">
                 <h1>Uncovering the Invisible Threat: Forever Chemicals in India</h1>
-                <p>An open-source initiative to track PFAS contamination across India.</p>
+                <p>An initiative to track PFAS contamination across India.</p>
             </div>
             <ScrollLink
                 to="about-section" // Changed from "main-content" to the correct ID

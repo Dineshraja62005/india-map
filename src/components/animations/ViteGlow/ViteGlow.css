@@ -6,44 +6,46 @@
     height: 100%;
     overflow: hidden;
     z-index: 0; /* Ensures it stays in the back */
-    background-color: #000000; /* Dark navy background */
+    background-color: #000000; /* Solid Black background */
 }
 
 .glow-blob {
     position: absolute;
     border-radius: 50%;
-    mix-blend-mode: screen; /* Blends the colors nicely */
-    filter: blur(70px);   /* The key to the soft, blurry effect */
-    opacity: 0.6;
+    /* Change mix-blend-mode to 'overlay' or 'soft-light' for a subtler grey effect,
+       or keep 'screen' if you want brighter grey spots */
+    mix-blend-mode: overlay;
+    filter: blur(80px);   /* Slightly increased blur for softness */
+    opacity: 0.3; /* Reduced opacity for subtlety */
 }
 
-/* Define the first blob's color, size, and animation */
+/* Define the first blob's color (dark grey), size, and animation */
 .glow-blob:nth-child(1) {
-    width: 350px;
-    height: 350px;
+    width: 400px; /* Adjusted size */
+    height: 400px;
     left: 15%;
     top: 20%;
-    background: rgba(45, 212, 191, 0.5); /* A teal color */
-    animation: float-blob-1 15s infinite alternate ease-in-out;
+    background: rgba(100, 100, 100, 0.4); /* Dark grey with alpha */
+    animation: float-blob-1 18s infinite alternate ease-in-out; /* Slightly slower animation */
 }
 
-/* Define the second blob's color, size, and animation */
+/* Define the second blob's color (slightly different dark grey), size, and animation */
 .glow-blob:nth-child(2) {
-    width: 450px;
-    height: 450px;
+    width: 500px; /* Adjusted size */
+    height: 500px;
     right: 10%;
     bottom: 10%;
-    background: rgba(124, 58, 237, 0.4); /* A purple color */
-    animation: float-blob-2 20s infinite alternate ease-in-out;
+    background: rgba(80, 80, 80, 0.3); /* Different dark grey with alpha */
+    animation: float-blob-2 22s infinite alternate ease-in-out; /* Slightly slower animation */
 }
 
-/* Keyframe animations to move the blobs around */
+/* Keyframe animations to move the blobs around (can keep as is or adjust speed/movement) */
 @keyframes float-blob-1 {
     0% {
         transform: translate(0, 0);
     }
     100% {
-        transform: translate(100px, 80px) scale(1.1);
+        transform: translate(80px, 60px) scale(1.1); /* Adjusted movement */
     }
 }
 
@@ -52,6 +54,6 @@
         transform: translate(0, 0);
     }
     100% {
-        transform: translate(-80px, -50px) scale(1.2);
+        transform: translate(-60px, -40px) scale(1.2); /* Adjusted movement */
     }
 }
