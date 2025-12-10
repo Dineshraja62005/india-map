@@ -15,8 +15,6 @@ const AdminDashboard = () => {
         try {
             const response = await fetch('http://localhost:5000/api/sites');
             const data = await response.json();
-            // MapLibre expects GeoJSON, but our API returns it wrapped. 
-            // Depending on your API structure, accessing .features is usually correct for GeoJSON.
             setSites(data.features || []);
         } catch (err) {
             console.error("Failed to fetch sites:", err);
@@ -36,11 +34,20 @@ const AdminDashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            // Convert string inputs to correct number types before sending
+            const payload = {
+                name: formData.name,
+                pfas_level: parseInt(formData.pfas_level), // Integer for Level
+                lat: parseFloat(formData.lat),             // Float for Latitude
+                lng: parseFloat(formData.lng)              // Float for Longitude
+            };
+
             await fetch('http://localhost:5000/api/sites', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(payload)
             });
+
             alert('Site Added Successfully!');
             fetchSites(); // Refresh list
             setFormData({ name: '', pfas_level: '', lat: '', lng: '' }); // Clear form
@@ -63,10 +70,7 @@ const AdminDashboard = () => {
     };
 
     return (
-        // 1. SCROLL WRAPPER: Handles the full-screen scroll behavior
         <div className="admin-scroll-wrapper">
-            
-            {/* 2. CONTENT CONTAINER: Centers the content */}
             <div className="admin-container">
                 <h1>Admin Dashboard - PFAS Tracker</h1>
                 
@@ -85,11 +89,12 @@ const AdminDashboard = () => {
                         <input 
                             type="number" 
                             name="pfas_level" 
-                            placeholder="PFAS Level (ppt)" 
+                            placeholder="PFAS Level (ppt) - Integer" 
                             value={formData.pfas_level} 
                             onChange={handleChange} 
                             required 
                         />
+                        {/* 'step="any"' allows decimals for Latitude */}
                         <input 
                             type="number" 
                             step="any" 
@@ -99,6 +104,7 @@ const AdminDashboard = () => {
                             onChange={handleChange} 
                             required 
                         />
+                        {/* 'step="any"' allows decimals for Longitude */}
                         <input 
                             type="number" 
                             step="any" 

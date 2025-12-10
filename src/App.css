@@ -179,6 +179,6 @@ button:focus-visible {
 
 #map-section {
   background-color: #000000; /* Deep black/grey */
-  color: white; /* Ensure any text in this section is white */
+  color: rgb(0, 0, 0); /* Ensure any text in this section is white */
   justify-content: center; /* Center the map vertically */
 }

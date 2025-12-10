@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Added Router imports
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/sections/Header/Header';
 import Hero from './components/sections/Hero/Hero';
@@ -8,13 +8,15 @@ import ThirdSection from './components/sections/ThirdSection/ThirdSection';
 import AdminDashboard from './components/pages/AdminDashboard';
 import Map from './components/sections/Map/Map';
 
-// 1. Define the LandingPage component
-// This contains the scroll logic and sections that were previously in App
-const LandingPage = () => {
+// Main Layout Component
+const MainApp = () => {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const heroRef = useRef(null);
+  const location = useLocation();
+  
+  // Check if we are currently on the standalone map page
+  const isMapOpen = location.pathname === '/map';
 
-  // Keep the intersection observer logic here so the header still fades in/out correctly
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -27,48 +29,50 @@ const LandingPage = () => {
       { threshold: 0.5 }
     );
 
-    if (heroRef.current) {
-      observer.observe(heroRef.current);
-    }
+    if (heroRef.current) observer.observe(heroRef.current);
 
     return () => {
-      if (heroRef.current) {
-        observer.unobserve(heroRef.current);
-      }
+      if (heroRef.current) observer.unobserve(heroRef.current);
     };
   }, []);
 
   return (
     <>
+      {/* Header and Main Content behave normally.
+        They stay mounted even when /map is active, preserving scroll position.
+      */}
       <Header isNavVisible={isNavVisible} />
+      
       <div className="scroll-container" id="scroll-container">
-        <div id="hero-section" ref={heroRef} className="scroll-section">
-          <Hero />
-        </div>
-        <div className="scroll-section">
-          <SplitSection />
-        </div>
-        <div className="scroll-section">
-          <ThirdSection />
-        </div>
+        <div id="hero-section" ref={heroRef} className="scroll-section"><Hero /></div>
+        <div className="scroll-section"><SplitSection /></div>
+        <div className="scroll-section"><ThirdSection /></div>
+        
+        {/* Embedded Map Section (The preview at the bottom) */}
         <div className="scroll-section" id="map-section">
-          <Map />
+          <Map isStandalone={false} /> 
         </div>
       </div>
+
+      {/* Standalone Map Overlay
+        Rendered on top of the site when URL is /map 
+      */}
+      {isMapOpen && (
+        <Map isStandalone={true} />
+      )}
     </>
   );
 };
 
-// 2. Redefine App to handle Routing
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Route for the public main page */}
-        <Route path="/" element={<LandingPage />} />
-        
-        {/* Route for the Admin Dashboard */}
         <Route path="/admin" element={<AdminDashboard />} />
+        {/* Catch-all route: Both '/' and '/map' render MainApp.
+           This prevents unmounting/remounting the landing page.
+        */}
+        <Route path="*" element={<MainApp />} />
       </Routes>
     </Router>
   );
